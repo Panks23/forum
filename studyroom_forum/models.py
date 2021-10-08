@@ -16,7 +16,7 @@ class BaseModel(models.Model):
 
 class Question(BaseModel):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000, null=True)
 
 
 
