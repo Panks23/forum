@@ -8,9 +8,11 @@ from studyroom_forum.models import *
 from studyroom_forum.serializer.AnswerCommentSerializer import AnswerCommentSerializer
 from studyroom_forum.response import *
 from studyroom_forum.pagination import *
+from studyroom_forum.decorators import authorized_user
 
 
 @api_view(['GET', 'POST'])
+@authorized_user
 def comment_get_or_post(request, ansId):
     if request.method == 'GET':
         paginator = StandardResultsSetPagination()
@@ -29,6 +31,7 @@ def comment_get_or_post(request, ansId):
 
 
 @api_view(['DELETE', 'PUT', 'GET'])
+@authorized_user
 def comment_delete_or_put_or_get(request, ansId, commentId):
     if request.method == 'DELETE':
         AnswerComments.objects.filter(pk=commentId, answer_id = ansId).delete()

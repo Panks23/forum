@@ -9,9 +9,11 @@ from studyroom_forum.serializer.AnswerAttachmentSerializer import AnswerAttachme
 from studyroom_forum.serializer.AnswerSerializer import AnswerSerializer
 from studyroom_forum.pagination import *
 from studyroom_forum.response import *
+from studyroom_forum.decorators import authorized_user
 
 
 @api_view(['GET', 'POST'])
+@authorized_user
 def answer_get_or_post(request, quesId):
     if request.method == 'GET':
         paginator = StandardResultsSetPagination()
@@ -30,6 +32,7 @@ def answer_get_or_post(request, quesId):
 
 
 @api_view(['DELETE', 'PUT', 'GET'])
+@authorized_user
 def answer_delete_or_put_or_get_by_id(request, quesId, ansId):
     if request.method == 'DELETE':
         try:
@@ -59,6 +62,7 @@ def answer_delete_or_put_or_get_by_id(request, quesId, ansId):
 
 
 @api_view(["POST", "GET"])
+@authorized_user
 def answer_attachment_post_or_get(request, ansId):
     if request.method == 'GET':
         paginator = StandardResultsSetPagination()
@@ -82,6 +86,7 @@ def answer_attachment_post_or_get(request, ansId):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["DELETE"])
+@authorized_user
 def answer_attachment_delete(request, ansId, attachementId):
     try:
         Answer.objects.get(pk = ansId)

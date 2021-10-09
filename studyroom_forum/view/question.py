@@ -29,6 +29,7 @@ def question_get_or_post(request):
 
 
 @api_view(['DELETE', 'PUT', 'GET'])
+@authorized_user
 def question_delete_or_put_or_get_by_id(request, quesId):
     if request.method == 'DELETE':
         Question.objects.filter(pk=quesId).delete()
@@ -54,6 +55,7 @@ def question_delete_or_put_or_get_by_id(request, quesId):
 
 
 @api_view(["POST", "GET"])
+@authorized_user
 def question_attachment_post_or_get(request, quesId):
     if request.method == 'GET':
         paginator = StandardResultsSetPagination()
@@ -77,6 +79,7 @@ def question_attachment_post_or_get(request, quesId):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["DELETE"])
+@authorized_user
 def question_attachment_delete(request, quesId, attachementId):
     try:
         question = Question.objects.get(pk = quesId)
