@@ -4,10 +4,11 @@ A place where you can ask your question and have answer.
 To run this
 
 1. Clone this project
-2. Make sure you have pythong 3 or above version is installed
+2. Make sure you have python 3 or above version is installed
 2. Create a virtual environment
-3. pip install -r requirement.txt
-4. pythong manage.py runserver
+3. Go to the folder where requirement.txt exist
+4. pip install -r requirement.txt
+5. pythong manage.py runserver
 
 
 
