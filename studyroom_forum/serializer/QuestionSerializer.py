@@ -12,5 +12,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         return Question.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
+        validated_data.pop("created_by")
         Question.objects.filter(pk=instance.id).update(**validated_data)
         return instance

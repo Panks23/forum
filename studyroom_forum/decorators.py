@@ -17,6 +17,8 @@ def authorized_user(function):
             print("Calling decorated function")
             profile = dummyAuthorization(token)
             if profile is not None:
+                request.data["created_by"] = profile.id
+                request.data["updated_by"] = profile.id
                 return function(request, *args, **kwargs)
             else:
                 return Response(getGenericResponse("You are not authorized to perform this action", None), status = status.HTTP_401_UNAUTHORIZED)
@@ -26,7 +28,7 @@ def authorized_user(function):
 
 def dummyAuthorization(token):
     if(token=="TENET"):
-        return User(2, "Rust")
+        return User(4, "Rust")
     return None
 
 class User():

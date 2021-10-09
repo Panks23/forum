@@ -50,7 +50,7 @@ def comment_delete_or_put_or_get(request, ansId, commentId):
             serializer = AnswerCommentSerializer(obj, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+                return Response(getGenericResponse("Successfully update the data", None), status=status.HTTP_202_ACCEPTED)
         except:
             return Response(getGenericResponse("Please pass valid ans/comment id", None), status = status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

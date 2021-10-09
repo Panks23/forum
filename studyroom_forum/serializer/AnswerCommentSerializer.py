@@ -13,3 +13,8 @@ class AnswerCommentSerializer(serializers.ModelSerializer):
         answer_id = validated_data.pop("answer_id")
         answer = Answer.objects.get(pk=answer_id)
         return AnswerComments.objects.create(**validated_data, answer_id=answer)
+
+    def update(self, instance, validated_data):
+        validated_data.pop("created_by")
+        AnswerComments.objects.filter(pk=instance.id).update(**validated_data)
+        return instance

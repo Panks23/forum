@@ -54,7 +54,7 @@ def answer_delete_or_put_or_get_by_id(request, quesId, ansId):
             serializer = AnswerSerializer(obj, data=request.data, partial= True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(getGenericResponse("Successfully update the answer",serializer.data), status=status.HTTP_202_ACCEPTED)
+                return Response(getGenericResponse("Successfully update the answer", None), status=status.HTTP_202_ACCEPTED)
         except:
             return Response(getGenericResponse("Please pass valid question/ans id", None), status = status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -76,8 +76,8 @@ def answer_attachment_post_or_get(request, ansId):
             attachment = dict()
             attachment["answer_id"] = ansId
             attachment["file_url"] = data["file_url"]
-            attachment["created_by"] = 2
-            attachment["updated_by"] = 2
+            attachment["created_by"] = request.data["created_by"]
+            attachment["updated_by"] = request.data["updated_by"]
             validated_data_for_attachement.append(attachment)
         serializer = AnswerAttachmentSerializer(data=validated_data_for_attachement, many = True)
         if serializer.is_valid():

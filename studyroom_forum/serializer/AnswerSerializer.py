@@ -12,3 +12,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         validated_data["version"] = 1
         question = Question.objects.get(pk=quesId)
         return Answer.objects.create(**validated_data, que_id = question)
+    def update(self, instance, validated_data):
+        validated_data.pop("created_by")
+        Answer.objects.filter(pk=instance.id).update(**validated_data)
+        return instance

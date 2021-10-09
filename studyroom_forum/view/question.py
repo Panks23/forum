@@ -69,8 +69,8 @@ def question_attachment_post_or_get(request, quesId):
             attachment = dict()
             attachment["question_id"] = quesId
             attachment["file_url"] = data["file_url"]
-            attachment["created_by"] = 2
-            attachment["updated_by"] = 2
+            attachment["created_by"] = request.data["created_by"]
+            attachment["updated_by"] = request.data["updated_by"]
             validated_data_for_attachement.append(attachment)
         serializer = QuestionAttachmentSerializer(data=validated_data_for_attachement, many = True)
         if serializer.is_valid():
