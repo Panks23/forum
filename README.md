@@ -15,4 +15,6 @@ To run this
 we don't need to the pythong manage.py makemigration and migrate as I have used default database provided(sqlite), which I have pushed in this repository
 in case there is some issue you can run these command
 
+PS: All the api expect token header with value "TENET" (for simplicity I have used static token or you can say dummy authorization)
+
 
