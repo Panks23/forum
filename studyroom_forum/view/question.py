@@ -1,6 +1,7 @@
 from django.http import response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from studyroom_forum.decorators import authorized_user
 from rest_framework.response import Response
 from studyroom_forum.serializer import *
 from studyroom_forum.models import *
@@ -11,6 +12,7 @@ from studyroom_forum.response import *
 
 
 @api_view(['GET', 'POST'])
+@authorized_user
 def question_get_or_post(request):
     if request.method == 'GET':
         paginator = StandardResultsSetPagination()
