@@ -6,10 +6,9 @@ from studyroom_forum.models import *
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ( "id" ,"description", "created_by", "updated_by", "version", "que_id")
+        fields = ( "id" ,"description", "created_by", "updated_by", "que_id")
     def create(self, validated_data):
         quesId = validated_data.pop("que_id")
-        print(validated_data)
+        validated_data["version"] = 1
         question = Question.objects.get(pk=quesId)
-        article_instance = Answer.objects.create(**validated_data, que_id = question)
-        return article_instance
+        return Answer.objects.create(**validated_data, que_id = question)
